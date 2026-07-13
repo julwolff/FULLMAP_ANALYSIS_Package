@@ -13,6 +13,7 @@ Individual analyses are implemented in:
         sites/
 """
 
+from scripts.config.analysis_config import *
 import MDAnalysis as mda
 import numpy as np
 
