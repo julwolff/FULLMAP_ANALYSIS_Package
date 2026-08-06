@@ -325,9 +325,6 @@ def create_sites_file(
         f"{spacegroup_number}"
         )
 
-    th_sites = find_tetrahedral_sites(
-        oxygen_positions
-    )
 
 
 
@@ -356,7 +353,7 @@ def create_sites_file(
                     continue
 
                 x, y, z = (
-                    site.frac_coords
+                    site.coords
                 )
 
                 f.write(
@@ -370,20 +367,51 @@ def create_sites_file(
 
                 site_id += 1
 
-        for pos in th_sites:
 
-            f.write(
-                f"{site_id} "
-                f"Li "
-                f"TH "
-                f"{pos[0]:.8f} "
-                f"{pos[1]:.8f} "
-                f"{pos[2]:.8f}\n"
-            )
-
-            site_id += 1
 
     print(
         f"{site_id} sites saved "
         f"to {output_file}"
     )
+
+if __name__ == "__main__":
+
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "Generate a sites.dat file from a CIF structure."
+        )
+    )
+
+    parser.add_argument(
+        "cif_file",
+        help="Input CIF file"
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        default="sites.dat",
+        help="Output site file (default: sites.dat)"
+    )
+
+    parser.add_argument(
+        "-e",
+        "--elements",
+        nargs="+",
+        default=["Li", "Mn"],
+        help=(
+            "Elements for which sites should be generated "
+            "(default: Li Mn)"
+        )
+    )
+
+    args = parser.parse_args()
+
+    create_sites_file(
+        args.cif_file,
+        output_file=args.output,
+        elements=tuple(args.elements)
+    )
+    

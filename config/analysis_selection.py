@@ -12,15 +12,15 @@ False -> skip analysis
 # THERMODYNAMICS
 # ==========================================================
 
-RUN_ENERGY = True
+RUN_ENERGY = False
 
 # ==========================================================
 # DYNAMICS
 # ==========================================================
 
-RUN_MSD = True
+RUN_MSD = False
 
-RUN_JUMPS = True
+RUN_JUMPS = False
 
 RUN_RESIDENCE = False
 
@@ -28,13 +28,13 @@ RUN_RESIDENCE = False
 # STRUCTURE
 # ==========================================================
 
-RUN_RDF = True
+RUN_RDF = False
 
-RUN_COORDINATION = True
+RUN_COORDINATION = False
 
-RUN_DISTORTION = True
+RUN_DISTORTION = False
 
-RUN_XRD = True
+RUN_XRD = False
 
 # ==========================================================
 # SITE ANALYSIS

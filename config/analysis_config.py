@@ -5,8 +5,9 @@
 # PATHS
 # ==========================================================
 
-WORK_DIR = "structures"
-SUB_WORK_DIR =["20Li","25Li","30Li","35Li","40Li","45Li","50Li","55Li"]
+
+WORK_DIR = "struc_test"
+SUB_WORK_DIR =["55Li"]
 
 
 DESTINATION_DIR = "ANALYSIS_HEAT"
@@ -17,8 +18,7 @@ TOPOLOGY_FILE = "in.data"
 
 LOG_FILE = "log.lammps"
 REFERENCE_CIF = "structure.cif"
-SITE_FILE = "/home/jwjules/Desktop/FULLMAP/FULLMAP_package_analysis/sites.dat"
-
+SITE_FILE = "/home/jwjules/Desktop/Github/FULLMAP_ANALYSIS/FULLMAP_ANALYSIS_Package/sites.dat"
 
 
 # ==========================================================
