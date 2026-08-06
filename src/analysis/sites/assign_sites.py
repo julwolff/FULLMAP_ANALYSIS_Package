@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-
+from MDAnalysis.lib.distances import distance_array
 
 def assign_sites(
         atom_position,
@@ -118,10 +118,11 @@ def assign_sites_trajectory(
 
                 # Search among all available sites
                 # Search among all available sites
-                distances = np.linalg.norm(
-                    coords - atom.position,
-                    axis=1
-                )
+                distances = distance_array(
+                    atom.position.reshape(1, 3),
+                    coords,
+                    box=ts.dimensions
+                )[0]
                 
                 # Find closest site
                 imin = np.argmin(distances)
