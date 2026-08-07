@@ -9,7 +9,7 @@ Plot configuration.
 # GLOBAL
 # ==========================================================
 
-SAVE_FIGURES = True
+SAVE_FIGURES = False
 
 FIGSIZE = (8, 6)
 
@@ -19,17 +19,17 @@ DPI = 300
 # INDIVIDUAL PLOTS
 # ==========================================================
 
-PLOT_MSD = True
+PLOT_MSD = False
 
-PLOT_RDF = True
+PLOT_RDF = False
 
-PLOT_COORDINATION = True
+PLOT_COORDINATION = False
 
-PLOT_DISTORTION = True
+PLOT_DISTORTION = False
 
-PLOT_ENERGY = True
+PLOT_ENERGY = False
 
-PLOT_XRD = True
+PLOT_XRD = False
 
 PLOT_OCCUPANCY = False
 

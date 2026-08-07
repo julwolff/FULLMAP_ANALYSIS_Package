@@ -10,25 +10,25 @@ False -> skip analysis
 
 AVERAGING = {
 
-    "msd_Li": True,
-    "msd_Mn": True,
-    "msd_O": True,
+    "msd_Li": False,
+    "msd_Mn": False,
+    "msd_O": False,
 
-    "rdf_evolution": True,
+    "rdf_evolution": False,
     
-    "coord_Mn": True,
+    "coord_Mn": False,
 
-    "distortion": True,
+    "distortion": False,
 
-    "energy": True,
+    "energy": False,
 
-    "diffusion": True,
+    "diffusion": False,
 
     "site_occupancy": False,
 
-    "jump_matrix": False,
+    "jump_matrix": True,
 
     "residence_time": False,
 
-    "xrd": True
+    "xrd": False
 }

@@ -235,33 +235,7 @@ def plot_xrd():
         )
 
 
-# ==========================================================
-# SITE OCCUPANCY
-# ==========================================================
 
-def plot_occupancy():
-
-    if not glob.glob(
-            "avg_site_occupancy.dat"):
-        return
-
-    data = np.loadtxt(
-        "avg_site_occupancy.dat"
-    )
-
-    plt.figure(figsize=FIGSIZE)
-
-    plt.bar(
-        data[:, 0],
-        data[:, 1]
-    )
-
-    plt.xlabel("Site ID")
-    plt.ylabel("Occupancy")
-
-    save_plot(
-        "avg_site_occupancy.png"
-    )
 
 
 # ==========================================================
@@ -291,7 +265,106 @@ def plot_residence():
     save_plot(
         "avg_residence_time.png"
     )
+    
 
+# ==========================================================
+# RESIDENCE TIMES
+# ==========================================================
+
+
+
+def plot_occupancy(
+        occupancy_file,
+        output_file="occupancy.png"):
+    """
+    Plot antisite occupancies as a function of frame.
+
+    Curves:
+    - Li atoms occupying Mn sites
+    - Mn atoms occupying Li sites
+
+    Values are plotted as fractions of the
+    corresponding atomic population.
+    """
+
+    data = np.loadtxt(
+        occupancy_file,
+        comments="#"
+    )
+
+    frames = data[:, 0]
+
+    n_li_li = data[:, 1]
+    n_li_mn = data[:, 2]
+
+    n_mn_li = data[:, 3]
+    n_mn_mn = data[:, 4]
+
+    # Compute ratios
+    li_ratio = (
+        n_li_mn /
+        (n_li_li + n_li_mn)
+    )
+
+    mn_ratio = (
+        n_mn_li /
+        (n_mn_li + n_mn_mn)
+    )
+
+    fig, ax = plt.subplots(
+        figsize=(8, 5)
+    )
+
+    ax.plot(
+        frames,
+        li_ratio,
+        lw=2,
+        label="Li in Mn sites"
+    )
+
+    ax.plot(
+        frames,
+        mn_ratio,
+        lw=2,
+        label="Mn in Li sites"
+    )
+
+    ax.set_xlabel(
+        "Frame"
+    )
+
+    ax.set_ylabel(
+        "Fraction"
+    )
+
+    ax.set_ylim(
+        0,
+        1
+    )
+
+    ax.set_title(
+        "Antisite Occupancy"
+    )
+
+    ax.legend()
+
+    ax.grid(
+        alpha=0.3
+    )
+
+    fig.tight_layout()
+
+    plt.savefig(
+        output_file,
+        dpi=300
+    )
+
+    plt.close()
+
+    print(
+        f"Occupancy plot written to "
+        f"{output_file}"
+    )
 
 # ==========================================================
 # MASTER FUNCTION
