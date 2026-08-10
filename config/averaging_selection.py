@@ -24,7 +24,7 @@ AVERAGING = {
 
     "diffusion": False,
 
-    "site_occupancy": False,
+    "site_occupancy": True,
 
     "jump_matrix": False,
 

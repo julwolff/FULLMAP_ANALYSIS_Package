@@ -86,6 +86,8 @@ def assign_sites_trajectory(
 
         # Loop over trajectory frames
         for iframe, ts in enumerate(u.trajectory):
+            
+            u.atoms.wrap()
 
             # Progress update every 100 frames
             if (
@@ -134,47 +136,47 @@ def assign_sites_trajectory(
                 
                 closest_site_coord = coords[imin]
                 
-                # ======================================================
-                # DEBUG
-                # ======================================================
-                print("\n[DEBUG]")
+                # # ======================================================
+                # # DEBUG
+                # # ======================================================
+                # print("\n[DEBUG]")
                 
-                print(
-                    f"Frame      : {iframe}"
-                )
+                # print(
+                #     f"Frame      : {iframe}"
+                # )
                 
-                print(
-                    f"Atom ID    : {atom.id}"
-                )
+                # print(
+                #     f"Atom ID    : {atom.id}"
+                # )
                 
-                print(
-                    f"Atom type  : {symbol}"
-                )
+                # print(
+                #     f"Atom type  : {symbol}"
+                # )
                 
-                print(
-                    f"Atom coord : {atom.position}"
-                )
+                # print(
+                #     f"Atom coord : {atom.position}"
+                # )
                 
-                print(
-                    f"Site ID    : {closest_site}"
-                )
+                # print(
+                #     f"Site ID    : {closest_site}"
+                # )
                 
-                print(
-                    f"Site type  : {closest_site_element}"
-                )
+                # print(
+                #     f"Site type  : {closest_site_element}"
+                # )
                 
-                print(
-                    f"Site coord : {closest_site_coord}"
-                )
+                # print(
+                #     f"Site coord : {closest_site_coord}"
+                # )
                 
-                print(
-                    f"Delta      : "
-                    f"{atom.position - closest_site_coord}"
-                )
+                # print(
+                #     f"Delta      : "
+                #     f"{atom.position - closest_site_coord}"
+                # )
                 
-                print(
-                    f"Distance   : {dmin:.4f} Å"
-                )
+                # print(
+                #     f"Distance   : {dmin:.4f} Å"
+                # )
                 
 
 
