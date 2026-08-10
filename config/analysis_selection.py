@@ -40,9 +40,8 @@ RUN_XRD = False
 # SITE ANALYSIS
 # ==========================================================
 
-RUN_SITE_ASSIGNMENT = True
+RUN_SITE_ASSIGNMENT = False
 
-RUN_SITE_OCCUPANCY = False
 
 # ==========================================================
 # DEFECT ANALYSIS

@@ -31,7 +31,7 @@ PLOT_ENERGY = False
 
 PLOT_XRD = False
 
-PLOT_OCCUPANCY = False
+PLOT_OCCUPANCY = True
 
 PLOT_RESIDENCE = False
 

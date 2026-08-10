@@ -181,20 +181,7 @@ if RUN_XRD:
     )
 
 
-# ==========================================================
-# OCCUPANCY (NOT FUNCTIONNAL)
-# ==========================================================
 
-if RUN_SITE_OCCUPANCY:
-
-    print("")
-    print("==================================================")
-    print(" SITE OCCUPANCY")
-    print("==================================================")
-
-    compute_site_occupancy(
-        assignment_file="site_assignment.dat"
-    )
 
 # ==========================================================
 # JUMPS 
@@ -208,7 +195,7 @@ if RUN_JUMPS:
     print("==================================================")
 
     compute_jumps(
-        assignment_file="site_assignment.dat"
+        assignment_file="site_assignement.dat"
     )
 
 # ==========================================================
