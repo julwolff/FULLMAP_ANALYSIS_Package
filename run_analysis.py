@@ -62,13 +62,13 @@ for system in SUB_WORK_DIR:
 
     temp_dir = os.path.join(
         system_path,
-        "TEMP"
+        TRAJ_DIR
     )
 
     if not os.path.isdir(temp_dir):
 
         print(
-            f"[WARNING] {temp_dir} not found"
+            f"[WARNING] Trajectory directory not found"
         )
 
         continue
