@@ -353,8 +353,9 @@ def create_sites_file(
                     continue
 
                 x, y, z = (
-                    site.coords
+                    site.frac_coords
                 )
+                
 
                 f.write(
                     f"{site_id} "
