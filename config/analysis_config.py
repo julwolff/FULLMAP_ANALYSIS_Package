@@ -6,13 +6,13 @@
 # ==========================================================
 
 
-WORK_DIR = "struc_test"
-SUB_WORK_DIR =["55Li"]
+WORK_DIR = "structure_tests"
+SUB_WORK_DIR =["sub_structure_tests"]
+TRAJ_DIR = "TRAJ_DIR_TEST"
 
+DESTINATION_DIR = "ANALYSIS_COOL"
 
-DESTINATION_DIR = "ANALYSIS_HEAT"
-
-TRAJ_FILE_NAME = "heat_dump.lammpstrj"
+TRAJ_FILE_NAME = "cool_dump.lammpstrj"
 
 TOPOLOGY_FILE = "in.data"
 

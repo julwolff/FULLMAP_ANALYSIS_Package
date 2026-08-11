@@ -274,7 +274,7 @@ def plot_residence():
 
 
 def plot_occupancy(
-        occupancy_file,
+        occupancy_file = "avg_site_occupancy.dat",
         output_file="occupancy.png"):
     """
     Plot antisite occupancies as a function of frame.

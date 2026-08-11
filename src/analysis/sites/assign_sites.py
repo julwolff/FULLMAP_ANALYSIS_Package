@@ -4,20 +4,6 @@
 import numpy as np
 from MDAnalysis.lib.distances import distance_array
 
-def assign_sites(
-        atom_position,
-        site_positions):
-    """
-    Return the index of the closest site.
-    """
-
-    distances = np.linalg.norm(
-        site_positions - atom_position,
-        axis=1
-    )
-
-    return np.argmin(distances)
-
 
 def assign_sites_trajectory(
         u,
@@ -51,6 +37,12 @@ def assign_sites_trajectory(
     site_ids = sites[:, 0].astype(int)
     elements = sites[:, 1]
     coords = sites[:, 3:6].astype(float)
+    
+    # Fractional coordinates from sites.dat
+    coords_frac = sites[:, 3:6].astype(float)
+    
+
+    
 
     # Compute basic statistics about available sites
     n_sites = len(site_ids)
@@ -86,6 +78,15 @@ def assign_sites_trajectory(
 
         # Loop over trajectory frames
         for iframe, ts in enumerate(u.trajectory):
+            
+            coords_frac = sites[:, 3:6].astype(float)
+
+            coords = np.dot(
+                coords_frac,
+                ts.triclinic_dimensions
+            )
+                        
+            u.atoms.wrap()
 
             # Progress update every 100 frames
             if (
@@ -124,6 +125,23 @@ def assign_sites_trajectory(
                     box=ts.dimensions
                 )[0]
                 
+                if iframe == 0 and atom.id == 8:
+
+                    print("")
+                    print("========================================")
+                    print("REFERENCE CHECK - ATOM 1")
+                    print("========================================")
+                
+                    print(f"Atom position : {atom.position}")
+                
+                    test_imin = np.argmin(distances)
+                
+                    print("")
+                    print(f"Closest site  : {site_ids[test_imin]}")
+                    print(f"Site type     : {elements[test_imin]}")
+                    print(f"Site position : {coords[test_imin]}")
+                    print(f"Distance      : {distances[test_imin]:.6f} Å")
+                
                 # Find closest site
                 imin = np.argmin(distances)
                 
@@ -134,63 +152,54 @@ def assign_sites_trajectory(
                 
                 closest_site_coord = coords[imin]
                 
-                # ======================================================
-                # DEBUG
-                # ======================================================
-                print("\n[DEBUG]")
+                # # ======================================================
+                # # DEBUG
+                # # ======================================================
+                # print("\n[DEBUG]")
                 
-                print(
-                    f"Frame      : {iframe}"
-                )
+                # print(
+                #     f"Frame      : {iframe}"
+                # )
                 
-                print(
-                    f"Atom ID    : {atom.id}"
-                )
+                # print(
+                #     f"Atom ID    : {atom.id}"
+                # )
                 
-                print(
-                    f"Atom type  : {symbol}"
-                )
+                # print(
+                #     f"Atom type  : {symbol}"
+                # )
                 
-                print(
-                    f"Atom coord : {atom.position}"
-                )
+                # print(
+                #     f"Atom coord : {atom.position}"
+                # )
                 
-                print(
-                    f"Site ID    : {closest_site}"
-                )
+                # print(
+                #     f"Site ID    : {closest_site}"
+                # )
                 
-                print(
-                    f"Site type  : {closest_site_element}"
-                )
+                # print(
+                #     f"Site type  : {closest_site_element}"
+                # )
                 
-                print(
-                    f"Site coord : {closest_site_coord}"
-                )
+                # print(
+                #     f"Site coord : {closest_site_coord}"
+                # )
                 
-                print(
-                    f"Delta      : "
-                    f"{atom.position - closest_site_coord}"
-                )
+                # print(
+                #     f"Delta      : "
+                #     f"{atom.position - closest_site_coord}"
+                # )
                 
-                print(
-                    f"Distance   : {dmin:.4f} Å"
-                )
+                # print(
+                #     f"Distance   : {dmin:.4f} Å"
+                # )
                 
 
 
-                
-                # Threshold check
-                if dmin > 1e9:
-                
-  
-                    site = "TH"
-                
-                else:
-                
-                    site = closest_site
 
                 
-                    
+                site = closest_site
+
 
 
                 # Save assignment

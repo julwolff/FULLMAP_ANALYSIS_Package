@@ -115,9 +115,11 @@ if AVERAGING.get(
 if AVERAGING.get(
         "site_occupancy",
         False):
+    
+    print("debug")
 
     files = get_files(
-        "site_occupancy"
+        "site_assignment"
     )
 
     if len(files):
