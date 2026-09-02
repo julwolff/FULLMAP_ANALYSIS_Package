@@ -11,13 +11,16 @@ import glob
 import os
 
 from config.averaging_selection import AVERAGING
+from config.analysis_config import matrix_atom_type
+
 
 from src.averaging.matrix import average_matrix
 from src.averaging.diffusion import average_diffusion
 from src.averaging.occupancy import average_site_occupancy
 from src.averaging.residence import average_residence_time
-from src.averaging.jumps import accumulate_jump_matrix
 from src.averaging.xrd import average_xrd
+from src.averaging.count_sites_changes import count_site_type_changes
+from src.averaging.matrix_jumps import site_transition_matrix
 
 
 # ==========================================================
@@ -134,29 +137,6 @@ if AVERAGING.get(
         )
 
 # ----------------------------------------------------------
-# JUMP MATRIX
-# ----------------------------------------------------------
-
-if AVERAGING.get(
-        "jump_matrix",
-        False):
-
-    files = get_files(
-        "jump_matrix"
-    )
-
-    if len(files):
-
-        print(
-            "[AVERAGE] jump_matrix"
-        )
-
-        accumulate_jump_matrix(
-            files,
-            "avg_jump_matrix.dat"
-        )
-
-# ----------------------------------------------------------
 # RESIDENCE TIMES
 # ----------------------------------------------------------
 
@@ -177,6 +157,54 @@ if AVERAGING.get(
         average_residence_time(
             files,
             "avg_residence_time.dat"
+        )
+
+# ----------------------------------------------------------
+# SITES CHANGE
+# ----------------------------------------------------------
+
+if AVERAGING.get(
+        "count_sites_change",
+        False):
+
+    files = get_files(
+        "site_assignment"
+    )
+
+    if len(files):
+
+        print(
+            "[COMPUTE] sites jumps"
+        )
+
+        count_site_type_changes(
+            files,
+            "avg_sites_jumps.dat"
+        )
+
+
+# ----------------------------------------------------------
+# SITES MATRIX
+# ----------------------------------------------------------
+
+if AVERAGING.get(
+        "matrix_jumps",
+        False):
+
+    files = get_files(
+        "site_assignment"
+    )
+
+    if len(files):
+
+        print(
+            "[COMPUTE] sites matrix"
+        )
+
+        site_transition_matrix(
+            files,
+            "avg_sites_matrix.dat",
+            matrix_atom_type
         )
 
 # ----------------------------------------------------------

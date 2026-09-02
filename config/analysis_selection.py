@@ -4,7 +4,7 @@
 """
 Analysis selection.
 
-False  -> run analysis
+True  -> run analysis
 False -> skip analysis
 """
 
@@ -19,10 +19,6 @@ RUN_ENERGY = False
 # ==========================================================
 
 RUN_MSD = False
-
-RUN_JUMPS = False
-
-RUN_RESIDENCE = False
 
 # ==========================================================
 # STRUCTURE
@@ -41,12 +37,6 @@ RUN_XRD = False
 # ==========================================================
 
 RUN_SITE_ASSIGNMENT = True
-
-# ==========================================================
-# DEFECT ANALYSIS
-# ==========================================================
-
-RUN_DEFECTS = False
 
 # ==========================================================
 # FUTURE ANALYSES

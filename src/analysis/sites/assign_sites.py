@@ -36,6 +36,7 @@ def assign_sites_trajectory(
     # Extract site metadata
     site_ids = sites[:, 0].astype(int)
     elements = sites[:, 1]
+    site_type = sites [:,2]
     coords = sites[:, 3:6].astype(float)
     
     # Fractional coordinates from sites.dat
@@ -73,7 +74,7 @@ def assign_sites_trajectory(
 
         # Write output header
         f.write(
-            "# Frame AtomID AtomType SiteID SiteType Distance\n"
+            "# Frame AtomID AtomType SiteID Distance SiteType\n"
         )
 
         # Loop over trajectory frames
@@ -149,50 +150,8 @@ def assign_sites_trajectory(
                 
                 closest_site = site_ids[imin]
                 closest_site_element = elements[imin]
+                closest_site_type = site_type[imin]
                 
-                closest_site_coord = coords[imin]
-                
-                # # ======================================================
-                # # DEBUG
-                # # ======================================================
-                # print("\n[DEBUG]")
-                
-                # print(
-                #     f"Frame      : {iframe}"
-                # )
-                
-                # print(
-                #     f"Atom ID    : {atom.id}"
-                # )
-                
-                # print(
-                #     f"Atom type  : {symbol}"
-                # )
-                
-                # print(
-                #     f"Atom coord : {atom.position}"
-                # )
-                
-                # print(
-                #     f"Site ID    : {closest_site}"
-                # )
-                
-                # print(
-                #     f"Site type  : {closest_site_element}"
-                # )
-                
-                # print(
-                #     f"Site coord : {closest_site_coord}"
-                # )
-                
-                # print(
-                #     f"Delta      : "
-                #     f"{atom.position - closest_site_coord}"
-                # )
-                
-                # print(
-                #     f"Distance   : {dmin:.4f} Å"
-                # )
                 
 
 
@@ -209,7 +168,8 @@ def assign_sites_trajectory(
                     f"{symbol} "
                     f"{site} "
                     f"{closest_site_element} "
-                    f"{dmin:.6f}\n"
+                    f"{dmin:.6f} "
+                    f"{closest_site_type}\n"
                 )
                 
                 frame_assignments += 1

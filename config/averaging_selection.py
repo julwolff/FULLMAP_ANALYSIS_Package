@@ -26,9 +26,11 @@ AVERAGING = {
 
     "site_occupancy": True,
 
-    "jump_matrix": False,
+    "matrix_jumps": True,
 
     "residence_time": False,
 
-    "xrd": False
+    "xrd": False,
+    
+    "count_sites_change" : False
 }

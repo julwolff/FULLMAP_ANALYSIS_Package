@@ -183,50 +183,24 @@ if RUN_XRD:
 
 
 
-# ==========================================================
-# JUMPS 
-# ==========================================================
 
-if RUN_JUMPS:
+# # ==========================================================
+# # RESIDENCE TIMES (NOT FUNCTIONNAL)
+# # ==========================================================
 
-    print("")
-    print("==================================================")
-    print(" JUMP ANALYSIS")
-    print("==================================================")
+# if RUN_RESIDENCE:
 
-    compute_jumps(
-        assignment_file="site_assignement.dat"
-    )
+#     print("")
+#     print("==================================================")
+#     print(" RESIDENCE TIMES")
+#     print("==================================================")
 
-# ==========================================================
-# RESIDENCE TIMES (NOT FUNCTIONNAL)
-# ==========================================================
+#     compute_residence_times(
+#         assignment_file="site_assignment.dat",
+#         timestep_ps=TIMESTEP
+#     )
 
-if RUN_RESIDENCE:
 
-    print("")
-    print("==================================================")
-    print(" RESIDENCE TIMES")
-    print("==================================================")
-
-    compute_residence_times(
-        assignment_file="site_assignment.dat",
-        timestep_ps=TIMESTEP
-    )
-
-# ==========================================================
-# DEFECT ANALYSIS (NOT FUNCTIONNAL)
-# ==========================================================
-
-if RUN_DEFECTS:
-
-    print("")
-    print("==================================================")
-    print(" DEFECT ANALYSIS")
-    print("==================================================")
-
-    find_vacancies()
-    find_antisites()
 
 # ==========================================================
 # FUTURE ANALYSES (NOT FUNCTIONNAL)

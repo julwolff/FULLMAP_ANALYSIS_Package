@@ -6,9 +6,9 @@
 # ==========================================================
 
 
-WORK_DIR = "structure_tests"
-SUB_WORK_DIR =["sub_structure_tests"]
-TRAJ_DIR = "TRAJ_DIR_TEST"
+WORK_DIR = "structures"
+SUB_WORK_DIR =["20Li","25Li","30Li","35Li","40Li","45Li","50Li","55Li"]
+TRAJ_DIR = "TEMP"
 
 DESTINATION_DIR = "ANALYSIS_COOL"
 
@@ -18,7 +18,8 @@ TOPOLOGY_FILE = "in.data"
 
 LOG_FILE = "log.lammps"
 REFERENCE_CIF = "structure.cif"
-SITE_FILE = "/home/jwjules/Desktop/Github/FULLMAP_ANALYSIS/FULLMAP_ANALYSIS_Package/sites.dat"
+SITE_FILE = "/home/jwjules/Desktop/FULLMAP/FULLMAP_ANALYSIS/FULLMAP_ANALYSIS_Package/sites.dat"
+
 
 
 # ==========================================================
@@ -33,7 +34,7 @@ TYPE_O  = "type 3"
 # TIME
 # ==========================================================
 
-TIMESTEP = 0.020
+TIMESTEP = 0.002
 
 # ==========================================================
 # ENERGY
@@ -73,7 +74,10 @@ XRD_WINDOW = 20000
 # SITE ANALYSIS
 # ==========================================================
 
-
-
-
 SITE_RADIUS = 1.5  # Å
+
+# =============================================================================
+# MATRIX JUMP
+# =============================================================================
+
+matrix_atom_type = ["Li","Mn"]
