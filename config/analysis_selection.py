@@ -4,7 +4,7 @@
 """
 Analysis selection.
 
-True  -> run analysis
+False  -> run analysis
 False -> skip analysis
 """
 
@@ -12,21 +12,21 @@ False -> skip analysis
 # THERMODYNAMICS
 # ==========================================================
 
-RUN_ENERGY = False
+RUN_ENERGY = True
 
 # ==========================================================
 # DYNAMICS
 # ==========================================================
 
-RUN_MSD = False
+RUN_MSD = True
 
 # ==========================================================
 # STRUCTURE
 # ==========================================================
 
-RUN_RDF = False
+RUN_RDF = True
 
-RUN_COORDINATION = False
+RUN_COORDINATION = True
 
 RUN_DISTORTION = False
 
@@ -36,7 +36,7 @@ RUN_XRD = False
 # SITE ANALYSIS
 # ==========================================================
 
-RUN_SITE_ASSIGNMENT = True
+RUN_SITE_ASSIGNMENT = True  
 
 # ==========================================================
 # FUTURE ANALYSES
@@ -48,6 +48,3 @@ RUN_COLLECTIVE_DIFFUSION = False
 
 RUN_DIFFUSION_NETWORK = False
 
-RUN_CREATE_SITES = False
-
-RUN_LARGE_DISPLACEMENTS = False

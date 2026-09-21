@@ -24,13 +24,13 @@ AVERAGING = {
 
     "diffusion": False,
 
-    "site_occupancy": True,
+    "site_occupancy": False,
 
-    "matrix_jumps": True,
+    "matrix_jumps": False,
 
     "residence_time": False,
 
     "xrd": False,
     
-    "count_sites_change" : False
+    "count_sites_change" : True
 }

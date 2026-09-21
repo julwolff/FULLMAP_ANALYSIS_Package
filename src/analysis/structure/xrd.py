@@ -18,7 +18,7 @@ def compute_xrd_series(
         twotheta_min=10,
         twotheta_max=90,
         dump_every=1000,
-        xrd_every=200000,
+        xrd_every=2000000,
         xrd_window=20000):
 
     print("Computing XRD series...")

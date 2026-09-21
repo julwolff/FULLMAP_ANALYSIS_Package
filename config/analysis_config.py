@@ -6,13 +6,13 @@
 # ==========================================================
 
 
-WORK_DIR = "structures"
-SUB_WORK_DIR =["20Li","25Li","30Li","35Li","40Li","45Li","50Li","55Li"]
-TRAJ_DIR = "TEMP"
+WORK_DIR = "LiMn2O4"
+SUB_WORK_DIR =["27Li"]
+TRAJ_DIR = "PROD"
 
-DESTINATION_DIR = "ANALYSIS_COOL"
+DESTINATION_DIR = "ANALYSIS_HEAT"
 
-TRAJ_FILE_NAME = "cool_dump.lammpstrj"
+TRAJ_FILE_NAME = "heat_dump.lammpstrj"
 
 TOPOLOGY_FILE = "in.data"
 
@@ -47,7 +47,7 @@ STEP_MAX = 2010000
 # RDF
 # ==========================================================
 
-RDF_SEGMENTS = 10
+RDF_SEGMENTS = 5
 
 # ==========================================================
 # COORDINATION
@@ -67,7 +67,7 @@ TWOTHETA_MAX = 90
 DUMP_EVERY = 1000
 
 XRD_POINTS = 4000
-XRD_EVERY = 200000
+XRD_EVERY = 2000000
 XRD_WINDOW = 20000
 
 # ==========================================================
