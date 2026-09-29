@@ -1,216 +1,115 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Aug  6 15:55:12 2026
-
-@author: jwjules
-"""
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""
-Created on Thu Aug 6 15:55:12 2026
-
-@author: jwjules
-"""
-
 import numpy as np
 
 
-def average_site_occupancy(
-        file_list,
-        output_file):
-    """
-    Compute the total site occupancy for each simulation frame.
+def average_site_occupancy(file_list, output_file):
 
-    For every input file, the function counts the number of atoms
-    occupying each type of crystallographic site. Four combinations
-    are considered:
-
-        - Li atom located in a Li site
-        - Li atom located in a Mn site
-        - Mn atom located in a Li site
-        - Mn atom located in a Mn site
-
-    The occupancies are accumulated frame by frame over all input
-    files before being written to the output file.
-
-    Parameters
-    ----------
-    file_list : list of str
-        List of input files.
-
-    output_file : str
-        Name of the output file.
-    """
-
-    print("=" * 70)
-    print("Starting site occupancy analysis")
-    print(f"Number of files to analyse : {len(file_list)}")
-    print("=" * 70)
-
-    # Dictionary storing cumulative occupancies
-    # Key   : frame number
-    # Value : [Li@Li, Li@Mn, Mn@Li, Mn@Mn]
     occupancy = {}
 
-    # ==========================================================
-    # Loop over all files
-    # ==========================================================
+    print("=" * 70)
+    print("SITE OCCUPANCY ANALYSIS")
+    print(f"Number of files : {len(file_list)}")
+    print("=" * 70)
 
-    for file_index, filename in enumerate(
-            file_list,
-            start=1):
+    for file_index, filename in enumerate(file_list, start=1):
 
-        print("\n" + "-" * 70)
-        print(
-            f"Processing file "
-            f"{file_index}/{len(file_list)}"
-        )
-        print(f"File : {filename}")
+        print()
+        print(f"[{file_index}/{len(file_list)}] Processing: {filename}")
 
         # ------------------------------------------------------
         # Load file
         # ------------------------------------------------------
 
-        table = np.loadtxt(
+        data = np.loadtxt(
             filename,
             comments="#",
-            dtype=str
+            dtype=str,
+            ndmin=2
         )
 
-        print(f"Rows loaded : {len(table)}")
+        frames = data[:, 0].astype(int)
+        atom_type = data[:, 2]
+        site_atom_type = data[:, 4]
+
+        unique_frames = np.unique(frames)
+        n_frames = len(unique_frames)
+
+        print(f"    Frames: {n_frames}")
 
         # ------------------------------------------------------
-        # Extract all frame numbers
+        # Analyse frames
         # ------------------------------------------------------
-
-        frames = np.unique(
-            table[:, 0].astype(int)
-        )
-
-        print(f"Frames detected : {len(frames)}")
-        print(
-            f"Frame range : "
-            f"{frames[0]} -> {frames[-1]}"
-        )
-
-        # ======================================================
-        # Loop over frames
-        # ======================================================
 
         for frame_index, frame in enumerate(
-                frames,
-                start=1):
+            unique_frames,
+            start=1
+        ):
 
-            # Print progress every 100 frames
-            if (
-                    frame_index == 1
-                    or
-                    frame_index % 100 == 0
-                    or
-                    frame_index == len(frames)
-            ):
+            mask = frames == frame
 
-                print(
-                    f"   Frame "
-                    f"{frame_index}/{len(frames)} "
-                    f"(ID = {frame})"
-                )
+            atoms = atom_type[mask]
+            sites = site_atom_type[mask]
 
-            mask = (
-                table[:, 0].astype(int)
-                == frame
+            # --------------------------------------------------
+            # Count occupations
+            # --------------------------------------------------
+
+            Li_in_Li = np.sum(
+                (atoms == "Li") & (sites == "Li")
             )
 
-            data = table[mask]
+            Li_in_Mn = np.sum(
+                (atoms == "Li") & (sites == "Mn")
+            )
 
-            # Counters
-            n_li_li = 0
-            n_li_mn = 0
-            n_mn_li = 0
-            n_mn_mn = 0
+            Mn_in_Li = np.sum(
+                (atoms == "Mn") & (sites == "Li")
+            )
 
-            # --------------------------------------------------
-            # Loop over atoms
-            # --------------------------------------------------
+            Mn_in_Mn = np.sum(
+                (atoms == "Mn") & (sites == "Mn")
+            )
 
-            for row in data:
-
-                atom_type = row[2]
-                site_type = row[4]
-
-                if (
-                        atom_type == "Li"
-                        and
-                        site_type == "Li"
-                ):
-
-                    n_li_li += 1
-
-                elif (
-                        atom_type == "Li"
-                        and
-                        site_type == "Mn"
-                ):
-
-                    n_li_mn += 1
-
-                elif (
-                        atom_type == "Mn"
-                        and
-                        site_type == "Li"
-                ):
-
-                    n_mn_li += 1
-
-                elif (
-                        atom_type == "Mn"
-                        and
-                        site_type == "Mn"
-                ):
-
-                    n_mn_mn += 1
+            values = np.array([
+                Li_in_Li,
+                Li_in_Mn,
+                Mn_in_Li,
+                Mn_in_Mn
+            ])
 
             # --------------------------------------------------
-            # Initialize frame if necessary
+            # Add to cumulative result
             # --------------------------------------------------
 
             if frame not in occupancy:
-
-                occupancy[frame] = np.zeros(
-                    4,
-                    dtype=int
-                )
+                occupancy[frame] = values
+            else:
+                occupancy[frame] += values
 
             # --------------------------------------------------
-            # Add counts to cumulative occupancy
+            # Progress
             # --------------------------------------------------
 
-            occupancy[frame] += np.array(
-                [
-                    n_li_li,
-                    n_li_mn,
-                    n_mn_li,
-                    n_mn_mn
-                ]
+            percent = 100 * frame_index / n_frames
+
+            print(
+                f"\r    Frame {frame_index}/{n_frames} "
+                f"({percent:6.2f}%)",
+                end="",
+                flush=True
             )
 
-        print("File completed.")
+        print()  # New line after progress
 
     # ==========================================================
     # Write output
     # ==========================================================
 
-    print("\n" + "=" * 70)
-    print("Writing output file...")
-    print(f"Output file : {output_file}")
-    print(f"Frames to write : {len(occupancy)}")
+    print()
+    print("=" * 70)
+    print("Writing output")
+    print("=" * 70)
 
-    with open(
-            output_file,
-            "w") as f:
+    with open(output_file, "w") as f:
 
         f.write(
             "# Frame "
@@ -220,8 +119,7 @@ def average_site_occupancy(
             "NMnatomsinMnSites\n"
         )
 
-        for frame in sorted(
-                occupancy.keys()):
+        for frame in sorted(occupancy):
 
             values = occupancy[frame]
 
@@ -233,7 +131,7 @@ def average_site_occupancy(
                 f"{values[3]}\n"
             )
 
-    print("Output successfully written.")
+    print(f"Output written to: {output_file}")
     print("=" * 70)
-    print("Site occupancy analysis completed successfully.")
+    print("Analysis completed.")
     print("=" * 70)
