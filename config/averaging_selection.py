@@ -32,5 +32,7 @@ AVERAGING = {
 
     "xrd": False,
     
-    "count_sites_change" : True
+    "count_sites_change" : False,
+    
+    "LCA": True
 }

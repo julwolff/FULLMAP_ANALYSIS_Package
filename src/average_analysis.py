@@ -21,6 +21,7 @@ from src.averaging.residence import average_residence_time
 from src.averaging.xrd import average_xrd
 from src.averaging.count_sites_changes import count_site_type_changes
 from src.averaging.matrix_jumps import site_transition_matrix
+from src.averaging.LCA import accumulate_local_structures
 
 
 # ==========================================================
@@ -241,6 +242,33 @@ if AVERAGING.get(
         average_xrd(
             files,
             f"avg_{basename}"
+        )
+        
+# ----------------------------------------------------------
+# LCA
+# ----------------------------------------------------------
+
+if AVERAGING.get(
+        "LCA",
+        False):
+
+    print(
+        "[AVERAGE] LCA"
+    )
+
+    files = get_files(
+        "LCA"
+    )
+
+    if len(files):
+
+        print(
+            "[COMPUTE] sites jumps"
+        )
+
+        accumulate_local_structures(
+            files,
+            "avg_LCA.dat"
         )
 
 # ==========================================================

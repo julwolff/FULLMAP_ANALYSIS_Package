@@ -50,6 +50,8 @@ print(f"Trajectory : {TRAJ_FILE_NAME}")
 print(f"Topology   : {TOPOLOGY_FILE}")
 print(f"Frames     : {n_frames}")
 
+
+
 # ==========================================================
 # ENERGY
 # ==========================================================
@@ -183,23 +185,29 @@ if RUN_XRD:
 
 
 
+# =============================================================================
+# LOCAL COMPOSITION ANALYSIS
+# =============================================================================
 
-# # ==========================================================
-# # RESIDENCE TIMES (NOT FUNCTIONNAL)
-# # ==========================================================
+if RUN_LCA:
 
-# if RUN_RESIDENCE:
+    print("")
+    print("==================================================")
+    print(" LCA")
+    print("==================================================")
 
-#     print("")
-#     print("==================================================")
-#     print(" RESIDENCE TIMES")
-#     print("==================================================")
 
-#     compute_residence_times(
-#         assignment_file="site_assignment.dat",
-#         timestep_ps=TIMESTEP
-#     )
-
+    local_composition_analysis(
+        u,
+        box_size,
+        5000,
+        TYPE_TO_ELEMENT,
+        "LCA.dat",
+        seed=None,
+        debug=False,
+        debug_every=100,
+    )
+    
 
 
 # ==========================================================

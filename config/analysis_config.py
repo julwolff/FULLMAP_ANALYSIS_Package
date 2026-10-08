@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
+
 # ==========================================================
 # PATHS
 # ==========================================================
 
 
-WORK_DIR = "LiMn2O4"
-SUB_WORK_DIR =["27Li"]
-TRAJ_DIR = "PROD"
+WORK_DIR = "structures"
+SUB_WORK_DIR =["25Li","30Li"]
+TRAJ_DIR = "TEMP"
 
-DESTINATION_DIR = "ANALYSIS_HEAT"
+DESTINATION_DIR = "ANALYSIS_COOL"
 
-TRAJ_FILE_NAME = "heat_dump.lammpstrj"
+TRAJ_FILE_NAME = "cool_dump.lammpstrj"
 
 TOPOLOGY_FILE = "in.data"
 
@@ -29,6 +31,12 @@ SITE_FILE = "/home/jwjules/Desktop/FULLMAP/FULLMAP_ANALYSIS/FULLMAP_ANALYSIS_Pac
 TYPE_LI = "type 1"
 TYPE_MN = "type 2"
 TYPE_O  = "type 3"
+
+TYPE_TO_ELEMENT = {
+    "type 1": "Li",
+    "type 2": "Mn",
+    "type 3": "O",
+}
 
 # ==========================================================
 # TIME
@@ -81,3 +89,6 @@ SITE_RADIUS = 1.5  # Å
 # =============================================================================
 
 matrix_atom_type = ["Li","Mn"]
+
+
+box_size = 7

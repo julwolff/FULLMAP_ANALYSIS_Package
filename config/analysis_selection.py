@@ -12,31 +12,33 @@ False -> skip analysis
 # THERMODYNAMICS
 # ==========================================================
 
-RUN_ENERGY = True
+RUN_ENERGY = False
 
 # ==========================================================
 # DYNAMICS
 # ==========================================================
 
-RUN_MSD = True
+RUN_MSD = False
 
 # ==========================================================
 # STRUCTURE
 # ==========================================================
 
-RUN_RDF = True
+RUN_RDF = False
 
-RUN_COORDINATION = True
+RUN_COORDINATION = False
 
 RUN_DISTORTION = False
 
 RUN_XRD = False
 
+RUN_LCA = True
+
 # ==========================================================
 # SITE ANALYSIS
 # ==========================================================
 
-RUN_SITE_ASSIGNMENT = True  
+RUN_SITE_ASSIGNMENT = False 
 
 # ==========================================================
 # FUTURE ANALYSES
