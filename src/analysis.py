@@ -206,6 +206,7 @@ if RUN_LCA:
         seed=None,
         debug=False,
         debug_every=100,
+        frame = "first"
     )
     
 

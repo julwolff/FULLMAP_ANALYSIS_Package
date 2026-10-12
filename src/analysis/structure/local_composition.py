@@ -199,6 +199,7 @@ def local_composition_analysis(
     seed=None,
     debug=False,
     debug_every=100,
+    frame = "first"
 ):
     """
     Perform random local-composition sampling.
@@ -238,6 +239,26 @@ def local_composition_analysis(
     debug_every : int
         Print a summary every N random boxes.
     """
+    # ==============================================================
+    # SELECT TRAJECTORY FRAME
+    # ==============================================================
+    
+    if frame == "first":
+        u.trajectory[0]
+    
+    elif frame == "last":
+        u.trajectory[-1]
+    
+    else:
+        raise ValueError(
+            "frame must be either 'first' or 'last'."
+        )
+    
+    if debug:
+        print(
+            f"\nAnalysing trajectory frame: "
+            f"{u.trajectory.frame}"
+        )
 
     # ==============================================================
     # LOCAL BOX SIZE
